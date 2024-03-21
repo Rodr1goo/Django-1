@@ -1,0 +1,92 @@
+{% extends "./base.html" %}
+
+{% block title %} Gestión de personas {% endblock %}
+
+
+{% block body %}
+  <div class = "row">
+      <div class = "col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        {% if messagges %}       
+        {% for messagges in messagges %}
+
+          <div class="alert alert-dismissible alert-success">
+            <button>
+
+            </button>
+          </div>
+
+        {% endfor %}
+        {% endif %}
+        
+        <h2>Gestión de personas</h2>
+        <div class = "card">
+            <div class = "card-body">
+                <form action="/registrarPersona/" method="POST">{% csrf_token %}
+                  <div class = "form-group">
+                    <input type = "text" id="numDni" name = "numDni" class = "form-control" placeholder = "SU DNI"
+                     minlength="6" maxlength= "8" required>
+
+                  </div>
+
+                  <div class = "form-group">
+                    <input type = "text" id="txtNombre" name = "txtNombre" class = "form-control" placeholder = "Nombre"
+                    maxlength= "50" required>
+
+                  </div>
+
+                  <div class = "form-group">
+                    <input type = "text" id="txtApellido" name = "txtApellido" class = "form-control" placeholder = "Apellido"
+                    maxlength= "50" required>
+
+                  </div>
+
+                  <div class = "form-group">
+                    <input type = "text" id="txtMateria" name = "txtMateria" class = "form-control" placeholder = "Materia Cursada"
+                     maxlength= "50" required>
+
+                  </div>
+                  <div class = "form-group">
+                    
+                    <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+
+                  </div>
+                </form>
+            </div>
+        </div>
+
+      </div>
+
+      <div class = "col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <h1>Listado de Personas</h1>
+          <div class = "table-responsive py-2">
+              <table class = "table table-striped">
+                  <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>DNI</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Materias</th>     
+                        <th colspan="2"> Opciones </th>                   
+                      </tr>
+                  </thead>
+                    <tbody>
+                      {% for u in usuarios %}
+                      <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{u.dni}}</td>
+                        <td>{{u.nombre}}</td>
+                        <td>{{u.apellido}}</td>
+                        <td>{{u.materia}}</td>
+                        <td><a href="edicionPersona/{{u.dni}}" class= "btn btn-info"> Editar </a></td>
+                        <td><a href="eliminarPersona/{{u.dni}}" class= "btn btn-danger btnEliminacion" > Eliminar </a></td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+              </table>
+          </div>
+
+      </div>
+  </div>
+
+{% endblock%}

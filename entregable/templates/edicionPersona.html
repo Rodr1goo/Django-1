@@ -1,0 +1,44 @@
+{% extends "./base.html" %}
+
+{% block title %} Edición {% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-4 offset-md-4 ">
+        <h2>Edición de personas</h2>
+        <div class = "card">
+          <div class = "card-body">
+              <form action="/editarPersona/" method="POST">{% csrf_token %}
+                <div class = "form-group">
+                  <input type = "text" id="numDni" name = "numDni" class = "form-control" value="{{usuario.dni}}" placeholder = "SU DNI"
+                   minlength="6" maxlength= "8" readonly required>
+
+                </div>
+
+                <div class = "form-group">
+                  <input type = "text" id="txtNombre" name = "txtNombre" class = "form-control" value="{{usuario.nombre}}" placeholder = "Nombre"
+                  maxlength= "50" required>
+
+                </div>
+
+                <div class = "form-group">
+                  <input type = "text" id="txtApellido" name = "txtApellido" class = "form-control" value="{{usuario.apellido}}" placeholder = "Apellido"
+                  maxlength= "50" required>
+
+                </div>
+
+                <div class = "form-group">
+                  <input type = "text" id="txtMateria" name = "txtMateria" class = "form-control" value="{{usuario.materia}}"
+                   maxlength= "50" required>
+
+                </div>
+                <div class = "form-group">
+                  
+                  <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+
+                </div>
+              </form>
+          </div>
+      </div>
+{% endblock %}
